@@ -46,21 +46,16 @@ public class Formatter {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		Collections.sort(list);
 		return list;
 	}
 
 	private void writeAndCount(ArrayList<String> list) {
-		Set<String> set = new TreeSet<String>(list);
+		//Set<String> set = new TreeSet<String>(list);
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/formatter/kunder2.txt"));) {
 
-			for (String phoneNumber : set) {
-                            //this line takes a lot of time:
+			for (String phoneNumber : list) {
 				int frequency=Collections.frequency(list, phoneNumber);
-                                // if you uncomment the line above and replace it with the line below,
-                                //the program will execute at least 10 times faster:
-                            //int frequency=2;//test this line instead of the line above
-                            //Do you know some way of making this faster? 
-                            //It is the counting of how many phone numbers that takes a lot of time.
 				if(frequency>1)
 				{
 				bufferedWriter.write(phoneNumber + ";" + frequency);
@@ -75,5 +70,3 @@ public class Formatter {
 	}
 
 }
-
-
